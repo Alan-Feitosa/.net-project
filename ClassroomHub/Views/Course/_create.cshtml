@@ -1,0 +1,43 @@
+﻿@using ClassroomHub.Web.ViewModels;
+@model CourseViewModel;
+
+<form method="post" asp-controller="Course" asp-action="Create">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCourse">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+    <div class="modal fade" id="createCourse" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-light text-black-50">
+                    <h5 class="modal-title text-white" id="createCourse">Cadastrar curso</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hiden="True">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label asp-for="Name" class="mb-0"></label>
+                            @Html.TextBoxFor(x => x.Name, new{Placeholder = "Insira o nome do curso", Attribute ="width:100%", @class="form-control mt-2"})
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>                        
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label asp-for="Description" class="mb-0"></label>
+                            @Html.TextAreaFor(x => x.Description, new {Placeholder = "Informe aqui a ementa do curso", Attribute="width:100%", @class="form-control mt-2"})
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn  btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

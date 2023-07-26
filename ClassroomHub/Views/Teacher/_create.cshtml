@@ -1,0 +1,49 @@
+﻿@using ClassroomHub.Web.ViewModels
+@model TeacherViewModel
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createTeacher">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+</button>
+<form class="form-group" method="post" asp-controller="Teacher" asp-action="Create">
+    <div class="modal fade" id="createTeacher" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " role="document">
+            <div class="modal-content ">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white">Cadastrar professor</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            @Html.DisplayNameFor(x => x.Email)
+                            @Html.DropDownListFor(x => x.UserId,(SelectList)ViewBag.Users, "selecione o email", new {@class="form-control"})
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            @Html.DisplayNameFor(x => x.Name)
+                            @Html.TextBoxFor(x => x.Name,new {@class="form-control", Placeholder="Insira o nome do professor"})
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            @Html.DisplayNameFor(x => x.Surname)
+                            @Html.TextBoxFor(x => x.Surname,new {@class="form-control", Placeholder="Insira o sobrenome do professor"})
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            @Html.DisplayNameFor(x => x.Especialization)
+                            @Html.TextBoxFor(x => x.Especialization, new {@class="form-control"})
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

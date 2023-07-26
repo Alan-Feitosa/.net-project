@@ -1,0 +1,69 @@
+﻿@using ClassroomHub.Web.ViewModels;
+@model IEnumerable<ModuleViewModel>
+
+<h1>Modulos</h1>
+
+<partial name="_create" model="new ModuleViewModel()" />
+
+<table class="table table-hover table-striped text-center">
+    <thead>
+        <tr class="success">
+            <th>
+                @Html.DisplayNameFor(x => x.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.End)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Hours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.TeacherName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @if(!Model.Any())
+    {
+        <span class="text-center text-danger">Não há módulos cadastrados </span>
+    } 
+    else
+    {
+        <tbody>
+
+            @for(int i = 0; i < Model.Count(); i++)
+            {
+                var module = Model.ToList()[i];
+                <tr>
+                    <td>
+                        @Html.DisplayFor(x => module.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => module.Start)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => module.End)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => module.Hours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => module.TeacherName)
+                    </td>
+                    <td>
+                        <a type="button" asp-action="Details" asp-route-id="@module.Id"><i class="fa-solid fa-info"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
+</table>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

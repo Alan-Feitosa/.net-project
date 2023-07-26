@@ -1,0 +1,13 @@
+﻿@{
+    Guid id = Guid.Empty;
+}
+
+<form asp-action="Index">
+    <div class="form-group">
+        <label>Cursos</label>
+        <select class="form-control" asp-for="@id" asp-items="@ViewBag.Courses"><option>Selecione um curso</option></select>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" />
+    </div>
+</form>

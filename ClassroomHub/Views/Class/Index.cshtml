@@ -1,0 +1,62 @@
+﻿@using System.Collections.Generic
+@using ClassroomHub.Web.ViewModels
+@model IEnumerable<ClassViewModel> 
+
+
+<h1>Turmas</h1>
+
+<partial name="_create" model="new ClassViewModel()"><partial/>
+<partial name="_searchClasses"></partial>
+
+@if(!Model.Any()){
+    <div class="text-center">
+        <span>Não há turmas cadastradas</span>
+    </div>
+}else
+{
+    <table class="table table-hover table-striped text-center">
+        <thead>
+            <tr class="success">
+                <th>
+                    @Html.DisplayNameFor(x => x.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.Start)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.End)
+                </th>
+                <th></th>                
+            </tr>
+        </thead>
+        <tbody>
+            @for(int i =0; i < Model.Count(); i++)
+                {
+                    var _class = Model.ToList()[i];
+                    <tr>
+                    <td>
+                        @Html.DisplayFor( x => _class.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => _class.Start)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => _class.End)
+                    </td>
+                    <td>
+                        <a asp-action="Update" asp-route-id="@_class.Id"><i class="fa fa-edit" style="font-size:x-large"></i></a>
+                            @{
+                                Tuple<string, Guid> param = new Tuple<string , Guid >("remove" + i, _class.Id);
+                            }
+                        <a data-toggle="modal" data-target="#@param.Item1"><i class="fa fa-trash ml-2"></i></a>
+                        <partial name="_delete" model="@param"></partial>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>    
+}
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

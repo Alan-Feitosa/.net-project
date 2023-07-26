@@ -1,0 +1,58 @@
+﻿@using ClassroomHub.Web.ViewModels
+@using System.Collections.Generic
+@model IEnumerable<TeacherViewModel>
+
+<h1>Professores</h1>
+
+
+<partial name="_create" model="new TeacherViewModel()" />
+<table class="table table-hover table-striped">
+    <thead>
+        <tr class="info">
+            <th>
+                @Html.DisplayNameFor(x => x.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Especialization)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td>
+                    <span class="text-center text-danger">Não há professores cadastrados</span>
+                </td>
+            </tr>
+        }
+        else
+        {
+            var teachers = Model.ToList();
+            for (int i = 0; i < teachers.Count; i++)
+            {
+                var teacher = teachers[i];
+                <tr>
+                    <td>
+                        @Html.DisplayFor(x => teacher.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => teacher.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => teacher.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => teacher.Especialization)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

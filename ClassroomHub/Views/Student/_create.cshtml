@@ -1,0 +1,60 @@
+﻿@model ClassroomHub.Web.ViewModels.StudentViewModel
+
+<form method="post" asp-controller="Student" asp-action="Create">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createStudent">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+    <div class="modal fade" id="createStudent" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white">Cadastrar Aluno</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                @{
+                    var classes = (SelectList)ViewBag.Classes;
+                    var users = (SelectList)ViewBag.Users;
+                    if (!users.Any())
+                    {
+                            <div class="modal-body">
+                                <span class="text-danger">Não é possível cadastrar novas alunos sem um usuário registrado.</span>
+                                <a type="button" asp-controller="User" asp-action="Index" class="btn btn-primary mt-2">Cadastrar usuário</a>  
+                        </div>
+                    }
+                    else
+                    {                        
+                        if (!classes.Any())
+                        {
+                            <div class="modal-body">
+                                <span class="text-danger">Não é possível cadastrar novas alunos sem uma turma registrada.</span>
+                                <a type="button"  asp-controller="Class" asp-action="Index" class="btn btn-primary mt-2">Cadastrar Curso</a>  
+                            </div>
+                        }else
+                        {
+                           <div class="modal-body">
+                                <div class="form-group">
+                                    @Html.DisplayNameFor(x => x.UserId)
+                                    @Html.DropDownListFor(x => x.UserId, users, "Selecione um usuário", new {@class="form-control"})
+                                    @Html.DisplayNameFor(x => x.ClassId)
+                                    @Html.DropDownListFor(x => x.ClassId, classes, "Selecione a turma",new {@class = "form-control"} )
+                                    @Html.DisplayNameFor(x => x.Name)
+                                    @Html.TextBoxFor(x => x.Name, new {@class="form-control"})
+                                    @Html.DisplayNameFor(x => x.Surname)
+                                    @Html.TextBoxFor(x => x.Surname,new {@class="form-control"})
+                                    @Html.DisplayNameFor(x => x.Birthday)
+                                    @Html.TextBoxFor( x => x.Birthday, new {type="date" ,@class="form-control"})
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                            </div>
+                        }
+                    }
+                 }
+            </div>
+        </div>
+    </div>
+</form>

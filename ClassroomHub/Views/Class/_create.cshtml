@@ -1,0 +1,64 @@
+﻿@using ClassroomHub.Web.ViewModels
+@model ClassViewModel
+
+<form method="post" asp-controller="Class" asp-action="Create">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createClass">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+    <div class="modal fade" id="createClass" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white">Cadastrar Turma</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                    @{
+                        var courses = (SelectList)ViewBag.Courses;
+                        if (!courses.Any())
+                        {
+                            <div class="modal-body">
+                                <span class="text-danger">Não é possível cadastrar novas turmas sem um curso registrado.</span>
+                                <a type="button"  asp-controller="Course" asp-action="Index" class="btn btn-primary mt-2">Cadastrar Curso</a>  
+                            </div>
+                        }else
+                        {
+                           <div class="modal-body">
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        @Html.DisplayNameFor(x => x.CourseId)
+                                        @Html.DropDownListFor(x => x.CourseId,(SelectList)ViewBag.Courses, "Selecione um curso", new {@class="form-control mt-2"})
+                                        <span asp-validation-for="CourseId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        @Html.DisplayNameFor(x => x.Name)
+                                        @Html.TextBoxFor(x => x.Name, new{ Placeholder="Nome da Turma", Attribute="width:100%", @class="form-control mt-2"})
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-6">
+                                        @Html.DisplayNameFor(x => x.Start)
+                                        @Html.TextBoxFor(x => x.Start, new {Placeholder = "Inicio" ,Type="Date", @class="form-control mt-2" })
+                                        <span asp-validation-for="Start" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-6">
+                                        @Html.DisplayNameFor(x => x.End)
+                                        @Html.TextBoxFor(x => x.End, new {Placeholder = "Conclusão", Type="Date", @class="form-control mt-2"})
+                                        <span asp-validation-for="End" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                            </div>
+                        }
+                    }
+            </div>
+        </div>
+    </div>
+</form>

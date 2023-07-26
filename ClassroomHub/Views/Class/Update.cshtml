@@ -1,0 +1,24 @@
+﻿@model ClassroomHub.Web.ViewModels.ClassViewModel
+
+<h1>Editar Turma</h1>
+<br />
+
+<form asp-action="Update" class="form-group">
+    @Html.DisplayNameFor(x => x.CourseId)
+    @Html.DropDownListFor(x => x.CourseId, (SelectList)ViewBag.Courses, "Escolha um curso", new { @class="form-control mb-2"})
+    @Html.DisplayNameFor(x => x.Name)
+    @Html.TextBoxFor(x => x.Name, new{@class="form-control mb-2"})
+    <div class="row mb-2">
+        <div class="col-6">
+            @Html.DisplayNameFor(x => x.Start)
+            @Html.TextBoxFor(x =>x.Start, new {type="date", @class="form-control"})
+        </div>
+        <div class="col-6">
+            @Html.DisplayNameFor(x => x.End)
+            @Html.TextBoxFor(x => x.End, new{type="date", @class="form-control"})
+        </div>
+    </div>
+
+    <button class="btn btn-secondary" asp-action="Index">Cancelar</button>
+    <button class="btn btn-primary" type="submit">Enviar</button>
+</form>

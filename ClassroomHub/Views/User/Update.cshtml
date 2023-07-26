@@ -1,0 +1,14 @@
+﻿@model ClassroomHub.Web.ViewModels.UserViewModel
+
+<h1>Editar Aluno</h1>
+
+<br />
+<form asp-action="Update" class="form-group">
+    @Html.DisplayNameFor(x => x.UserName)
+    @Html.TextBoxFor(x => x.UserName, new{@class="mb-2 form-control"})
+    @Html.DisplayNameFor(x => x.Password)
+    @Html.TextBoxFor(x => x.Password,new{@class="mb-2 form-control", type="password"})
+
+    <button class="btn btn-secondary" asp-action="Index">Cancelar</button>
+    <button class="btn btn-primary" type="submit">Enviar</button>      
+</form>

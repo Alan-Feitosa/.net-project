@@ -1,0 +1,28 @@
+﻿@using ClassroomHub.Web.ViewModels;
+@model CourseViewModel;
+
+<div class="row">
+    <div class="col-12">
+        <h1>Editar curso.</h1>
+    </div>
+</div>
+
+<form method="post" asp-controller="Course" asp-action="Edit">  
+    <div class="form-group">
+   
+                @Html.DisplayNameFor(x => x.Name)
+                @Html.TextBoxFor(x => x.Name, new {Placeholder="Informe o nome do curso", Attribute="width:100%", @class="form-control mt-2"})
+                <span asp-validation-for="Name" class="text-danger"></span>
+
+                <label asp-for="Description"></label>
+                @Html.TextAreaFor(x => x.Description, new {Placeholder = "Informe aqui a ementa do curso", Attribute="width:100%", @class="form-control"})
+ 
+       
+        <button type="button" class="btn btn-secondary mt-2 mr-2"><a asp-action="Index" class="text-white">Cancelar</a></button> 
+        <button type="submit" class="btn btn-primary mt-2">Salvar</button>                
+    </div>   
+</form>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

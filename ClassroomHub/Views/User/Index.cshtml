@@ -1,0 +1,36 @@
+﻿@using ClassroomHub.Web.ViewModels;
+@model IEnumerable<UserViewModel>
+
+<h1>Usuários</h1>
+<br />
+<partial name="_create" model="new UserViewModel()"></partial>
+
+<table class="table table-hover table-striped text-center">
+    <thead >
+        <tr class="info">
+            <th>
+                @Html.DisplayNameFor(x => x.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => x.Password)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var user in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => user.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => user.Password)
+                </td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@user.Id"><i class="fa fa-edit"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

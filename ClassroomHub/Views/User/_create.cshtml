@@ -1,0 +1,35 @@
+﻿@model ClassroomHub.Web.ViewModels.UserViewModel
+
+<form method="post" asp-controller="User" asp-action="Create">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createUser">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+    <div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white">Cadastrar Usuário</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                     <div class="form-group">
+                         @Html.DisplayNameFor(x => x.UserName)
+                         @Html.TextBoxFor(x => x.UserName, new {@class="form-control"})
+                         @Html.DisplayNameFor(x => x.Password)
+                         @Html.TextBoxFor(x => x.Password,new {@class="form-control", type="password"})
+                         @Html.RadioButtonFor(m => m.IsTeacher, true) 
+                         <span>Professor</span>
+                         @Html.RadioButtonFor(m => m.IsTeacher, false) 
+                         <span>Aluno</span>
+                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

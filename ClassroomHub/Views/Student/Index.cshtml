@@ -1,0 +1,62 @@
+﻿@using ClassroomHub.Web.ViewModels;
+@using System.Collections.Generic;
+@model IEnumerable<StudentViewModel>
+<h1>Estudantes</h1>
+
+<div class="row">
+    <div class="col-12">
+        <partial name="_create" model="new StudentViewModel()"><partial/>
+    </div>
+</div>
+<br>
+@if (Model.Any())
+{    
+    <table class="table table-striped table-hover text-center">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Surname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Birthday);
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => student.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => student.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => student.Email)
+                    </td>
+                    <td>
+                        @if (student.Birthday == DateTime.MinValue)
+                        {
+                            <span>Data de nascimento não registrada</span>
+                        }else
+                        {
+                            @Html.DisplayFor(x => student.Birthday)    
+                        }
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}else{
+    <div class="row text-md-center">
+        <span class="text-danger">Não há alunos registrados</span>
+    </div>
+}

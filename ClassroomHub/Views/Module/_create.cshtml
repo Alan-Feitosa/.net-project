@@ -1,0 +1,59 @@
+﻿@model ClassroomHub.Web.ViewModels.ModuleViewModel
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModule">
+    <i class="fa fa-plus"></i>
+</button>
+
+<form method="post" asp-controller="Module" asp-action="Create">
+
+<div class="modal fade" id="createModule" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-white">Cadastrar Modulo</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Fechar"></button>
+            </div>          
+            @{
+                var teachers = (SelectList)ViewBag.Teachers;
+                if (!teachers.Any())
+                {
+                    <div class="modal-body">
+                        <span class="text-danger"> Não há professores cadastrados</span>
+                        <a type="button" asp-controller="Teacher" asp-action="Index" class="btn btn-primary"> Criar professor</a>
+                    </div>
+                }
+                else
+                {
+                   <div class ="modal-body">
+                        <div class="form-group text-danger" asp-validation-summary="All">
+                            @Html.DisplayNameFor(x => x.TeacherName)
+                            @Html.DropDownListFor(x => x.TeacherId, teachers, "Selecione o professor", new { @class="form-control"})
+                            
+                            @Html.DisplayNameFor(x => x.Name)
+                            @Html.TextBoxFor(x => x.Name, new {@class="form-control mt-2"})
+                            
+                            @Html.DisplayNameFor(x => x.Description)
+                            @Html.TextAreaFor(x => x.Description , new {@class="form-control mt-2"})
+                            <div class="row mt-2">
+                                <div class="col-6">
+                                    @Html.DisplayNameFor(x => x.Start)
+                                    @Html.TextBoxFor(x => x.Start, new {type="date", @class="form-control mt-2"})
+                                </div>
+                                <div class="col-6">
+                                    @Html.DisplayNameFor(x => x.End)
+                                    @Html.TextBoxFor(x => x.End, new {type="date", @class="form-control mt-2"})
+                                </div>
+                            </div>
+                            @Html.DisplayNameFor(x => x.Hours)
+                            @Html.TextBoxFor(x => x.Hours, new {type="number", @class="form-control mt-2"})
+                        </div>
+                   </div>
+                }
+            }          
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" asp-action="Create">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
